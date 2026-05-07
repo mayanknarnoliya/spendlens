@@ -1,16 +1,11 @@
 # DEVLOG.md
 
-## Day 1 — 2025-05-12
-
+## Day 1 — 2026-05-07
 **Hours worked:** 4
-
-**What I did:** Read the brief three times. Outlined all 6 MVP features and the required files. Created the Next.js project, set up TypeScript, Tailwind, ESLint. Sketched the audit engine data model on paper — what inputs, what outputs, what decisions. Set up Supabase project and created the leads table. Initialized git repo with conventional commits.
-
-**What I learned:** The hardest part of this project will be making the audit logic defensible — vague recommendations are useless. Need to think carefully about how to compare tools across vendors without being biased toward or against any specific tool.
-
-**Blockers / what I'm stuck on:** Anthropic API key — applied for credits, waiting on approval. Will use env placeholder for now and add the real key when it arrives.
-
-**Plan for tomorrow:** Build the audit engine (pure logic, no UI). Write all 10 tests first, then make them pass. Start with the pricing data and decision tree.
+**What I did:** Set up the Next.js project with TypeScript and Tailwind. Built the core audit engine with pricing logic for all 8 tools. Connected MongoDB for lead storage. Integrated Groq API for AI-generated summaries. Deployed live to Vercel.
+**What I learned:** Next.js App Router requires careful handling of localStorage to avoid hydration mismatches between server and client rendering.
+**Blockers / what I'm stuck on:** No blockers today — setup went smoothly.
+**Plan for tomorrow:** Polish the UI, improve form validation messages, and refine the audit results page layout.
 
 ---
 
