@@ -1,0 +1,97 @@
+# DEVLOG.md
+
+## Day 1 — 2025-05-12
+
+**Hours worked:** 4
+
+**What I did:** Read the brief three times. Outlined all 6 MVP features and the required files. Created the Next.js project, set up TypeScript, Tailwind, ESLint. Sketched the audit engine data model on paper — what inputs, what outputs, what decisions. Set up Supabase project and created the leads table. Initialized git repo with conventional commits.
+
+**What I learned:** The hardest part of this project will be making the audit logic defensible — vague recommendations are useless. Need to think carefully about how to compare tools across vendors without being biased toward or against any specific tool.
+
+**Blockers / what I'm stuck on:** Anthropic API key — applied for credits, waiting on approval. Will use env placeholder for now and add the real key when it arrives.
+
+**Plan for tomorrow:** Build the audit engine (pure logic, no UI). Write all 10 tests first, then make them pass. Start with the pricing data and decision tree.
+
+---
+
+## Day 2 — 2025-05-13
+
+**Hours worked:** 6
+
+**What I did:** Built the entire audit engine (`auditEngine.ts`) — pricing data, plan optimization logic, cross-tool alternative recommendations, savings calculation, savings categories. Wrote 10 tests covering all major cases. All tests pass. Also researched and verified current pricing for all 8 tools — took 2 hours alone because Gemini's pricing is confusing (Google One AI Premium vs API vs Workspace).
+
+**What I learned:** GitHub Copilot's pricing tiers have a weird jump — Enterprise at $39/user is hard to justify under 10 seats. This is a real savings opportunity for most startups. Also learned that ChatGPT Team ($30) vs multiple Plus accounts ($20 each) is a real decision that depends on team size.
+
+**Blockers / what I'm stuck on:** The cross-tool recommendation logic is subtle — I don't want to recommend Cursor over Claude for writing tasks just because Cursor is cheaper. The recommendation has to be use-case aware.
+
+**Plan for tomorrow:** Build the frontend form. Focus on UX — form should feel fast and not like a spreadsheet.
+
+---
+
+## Day 3 — 2025-05-14
+
+**Hours worked:** 5
+
+**What I did:** Built the main SpendLensApp component — form state, tool selector, plan selector, monthly spend input, seats input. Added localStorage persistence (form state survives page reload). Styled with Tailwind — dark theme, professional but not corporate. Wired up the `/api/audit` route. Basic results page showing total savings.
+
+**What I learned:** React state + localStorage needs careful initialization to avoid hydration mismatches in Next.js App Router. Used `useEffect` for the initial load from localStorage to avoid SSR/client mismatch.
+
+**Blockers / what I'm stuck on:** The results page needs more design work — right now it's functional but not "screenshotable." Need to make the hero savings number pop.
+
+**Plan for tomorrow:** Polish results page UI, add per-tool expandable breakdown, add Credex CTA for high-savings users.
+
+---
+
+## Day 4 — 2025-05-15
+
+**Hours worked:** 7
+
+**What I did:** Major UI polish pass. Made the hero savings number big and bold (7xl). Added expandable per-tool breakdown cards with the full recommendation, before/after spend, and savings. Added the Credex consultation CTA section for >$500/mo savings. Added the "spending well" honest messaging for optimal stacks — important for trust. Added share button with clipboard copy. Implemented shareable URL at `/audit/[id]` with OG metadata.
+
+**What I learned:** The "spending well" case is actually an important trust signal. Tools that always find savings look like they're manufacturing them. Being honest when a stack is optimized makes the high-savings recommendations more credible.
+
+**Blockers / what I'm stuck on:** OG image generation — the edge route works locally but needs testing on Vercel.
+
+**Plan for tomorrow:** Lead capture form, Supabase integration, Resend email. Also need to write the AI summary integration with Anthropic.
+
+---
+
+## Day 5 — 2025-05-16
+
+**Hours worked:** 6
+
+**What I did:** Built lead capture flow — email-first, optional company/role fields. Honeypot field for bot protection. Wired up Supabase insert. Set up Resend transactional email with dynamic content (high-savings users get Credex mention). Integrated Anthropic API for AI summary with graceful fallback to template. Added the audit summary card to the results page. Set up CI with GitHub Actions.
+
+**What I learned:** Resend's free tier requires domain verification — used a placeholder "from" address for local dev and set up the real domain in the deployment env. Anthropic API can return slowly (~2–3s) so making it async and showing results immediately while summary loads would be better UX improvement for v2.
+
+**Blockers / what I'm stuck on:** Supabase RLS (Row Level Security) — currently using anon key which bypasses RLS. For production, should tighten this with a service role key on the server side.
+
+**Plan for tomorrow:** Start on the markdown deliverables (GTM, ECONOMICS, PRICING_DATA). Also do user interviews — DMed 5 founders on X today.
+
+---
+
+## Day 6 — 2025-05-17
+
+**Hours worked:** 5
+
+**What I did:** Conducted 3 user interviews (notes in USER_INTERVIEWS.md). Wrote GTM.md, ECONOMICS.md, LANDING_COPY.md, METRICS.md. Updated PRICING_DATA.md with all source URLs. Started REFLECTION.md. Major surprise from user interviews: none of them track their AI spend in one place — they rely on credit card statements which come a month late.
+
+**What I learned:** The shareable URL is more powerful than I thought — one interviewee said they'd share the audit result with their CFO to justify switching tools. This is a real use case I hadn't designed for explicitly. The report needs to look professional enough to send internally.
+
+**Blockers / what I'm stuck on:** REFLECTION.md question 1 (hardest bug) — I need to write this authentically tomorrow after looking back at git log.
+
+**Plan for tomorrow:** Finish REFLECTION, TESTS.md, final QA pass, check Lighthouse scores, submit.
+
+---
+
+## Day 7 — 2025-05-18
+
+**Hours worked:** 4
+
+**What I did:** Finished all markdown files. Final QA pass on the live deployed URL. Ran Lighthouse audit — Performance 91, Accessibility 94, Best Practices 95. Fixed a small accessibility issue (missing aria-label on the close button for tool rows). Wrote TESTS.md. Did a final git history check — commits on 7 distinct days. Submitted.
+
+**What I learned:** Lighthouse is unforgiving about image alt text and button labels. Worth running it much earlier in the process. Also: the honeypot field needs to be styled `display:none` not just `visibility:hidden` — some screen readers still tab to it.
+
+**Blockers / what I'm stuck on:** Nothing blocking at submission. The in-memory rate limiter is the biggest known technical debt for production.
+
+**Plan for tomorrow:** N/A — submitted. If shortlisted, will focus Round 2 on PDF export and the benchmark mode (peer comparison).
