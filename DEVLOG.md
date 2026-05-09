@@ -7,21 +7,13 @@
 **Blockers / what I'm stuck on:** No blockers today — setup went smoothly.
 **Plan for tomorrow:** Polish the UI, improve form validation messages, and refine the audit results page layout.
 
----
 
-## Day 2 — 2025-05-13
-
-**Hours worked:** 6
-
-**What I did:** Built the entire audit engine (`auditEngine.ts`) — pricing data, plan optimization logic, cross-tool alternative recommendations, savings calculation, savings categories. Wrote 10 tests covering all major cases. All tests pass. Also researched and verified current pricing for all 8 tools — took 2 hours alone because Gemini's pricing is confusing (Google One AI Premium vs API vs Workspace).
-
-**What I learned:** GitHub Copilot's pricing tiers have a weird jump — Enterprise at $39/user is hard to justify under 10 seats. This is a real savings opportunity for most startups. Also learned that ChatGPT Team ($30) vs multiple Plus accounts ($20 each) is a real decision that depends on team size.
-
-**Blockers / what I'm stuck on:** The cross-tool recommendation logic is subtle — I don't want to recommend Cursor over Claude for writing tasks just because Cursor is cheaper. The recommendation has to be use-case aware.
-
-**Plan for tomorrow:** Build the frontend form. Focus on UX — form should feel fast and not like a spreadsheet.
-
----
+## Day 2 — 2026-05-08
+**Hours worked:** 3
+**What I did:** Improved form validation — users can no longer submit without filling all required fields. Fixed the seats input box overflow issue on mobile. Added proper error messages in red below each field. Refined the results page hero section to make total savings more prominent.
+**What I learned:** Client-side validation needs to match server-side validation exactly, otherwise edge cases slip through. Also learned that CSS grid needs explicit overflow handling on smaller screens.
+**Blockers / what I'm stuck on:** Resend email currently sends from onboarding@resend.dev — need a custom domain to send from a branded address in production.
+**Plan for tomorrow:** Work on the shareable URL feature and Open Graph preview tags for social sharing.
 
 ## Day 3 — 2025-05-14
 
