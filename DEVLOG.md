@@ -15,19 +15,12 @@
 **Blockers / what I'm stuck on:** Resend email currently sends from onboarding@resend.dev — need a custom domain to send from a branded address in production.
 **Plan for tomorrow:** Work on the shareable URL feature and Open Graph preview tags for social sharing.
 
-## Day 3 — 2025-05-14
-
-**Hours worked:** 5
-
-**What I did:** Built the main SpendLensApp component — form state, tool selector, plan selector, monthly spend input, seats input. Added localStorage persistence (form state survives page reload). Styled with Tailwind — dark theme, professional but not corporate. Wired up the `/api/audit` route. Basic results page showing total savings.
-
-**What I learned:** React state + localStorage needs careful initialization to avoid hydration mismatches in Next.js App Router. Used `useEffect` for the initial load from localStorage to avoid SSR/client mismatch.
-
-**Blockers / what I'm stuck on:** The results page needs more design work — right now it's functional but not "screenshotable." Need to make the hero savings number pop.
-
-**Plan for tomorrow:** Polish results page UI, add per-tool expandable breakdown, add Credex CTA for high-savings users.
-
----
+## Day 3 — 2026-05-09
+**Hours worked:** 4
+**What I did:** Implemented shareable audit URLs at /audit/[id] with proper Open Graph and Twitter card meta tags. Each audit now gets a unique nanoid-based URL. Added the OG image generation endpoint at /api/og using edge runtime. Tested sharing on Twitter and LinkedIn — previews render correctly with savings amount.
+**What I learned:** Next.js edge runtime has limitations — cannot use Node.js specific modules like fs or path. OG image generation works best as a separate lightweight endpoint. Also learned that social crawlers cache OG images aggressively so cache-control headers matter.
+**Blockers / what I'm stuck on:** OG image is currently HTML-based, not a real image — some platforms may not render it correctly. Would need satori or @vercel/og for a proper image in v2.
+**Plan for tomorrow:** Write and verify all pricing data sources in PRICING_DATA.md, cross-check every number against official vendor pages.
 
 ## Day 4 — 2025-05-15
 
